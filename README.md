@@ -91,25 +91,25 @@ Beyond the core lab, I also completed the **Week 1 extra projects**: an Android-
 
 In VirtualBox: **File → Tools → Network → NAT Networks → Create**. Name it `NatNetwork`, set the IPv4 prefix to `10.0.0.0/24` and keep DHCP enabled.
 
-![NAT Network](screenshots/01-virtualbox-nat-network.png)
+![NAT Network](01-virtualbox-nat-network.png)
 
 ### Step 2: Attach Kali to the NAT Network
 
 Kali VM → **Settings → Network → Adapter 1** → *Attached to: NAT Network* → *Name: NatNetwork*.
 
-![Kali network adapter](screenshots/02-kali-network-adapter.png)
+![Kali network adapter](02-kali-network-adapter.png)
 
 ### Step 3: Enable Clipboard and Drag & Drop
 
 Kali VM → **Settings → General → Features** → set both **Shared Clipboard** and **Drag-and-Drop** to **Bidirectional**.
 
-![Clipboard and drag and drop](screenshots/03-kali-clipboard-dragdrop.png)
+![Clipboard and drag and drop](03-kali-clipboard-dragdrop.png)
 
 ### Step 4: Configure the Shared Folder
 
 Kali VM → **Settings → Shared Folders** → add the host `Downloads` folder with **Full** access and **Auto-mount** enabled.
 
-![Shared folder settings](screenshots/04-kali-shared-folder-settings.png)
+![Shared folder settings](04-kali-shared-folder-settings.png)
 
 ### Step 5: Install Guest Additions packages
 
@@ -122,7 +122,7 @@ sudo usermod -aG vboxsf $(whoami)
 sudo reboot
 ```
 
-![Guest additions install](screenshots/05-guest-additions-install.png)
+![Guest additions install](05-guest-additions-install.png)
 
 After the reboot, the shared folder mounts at `/media/sf_Downloads`:
 
@@ -130,7 +130,7 @@ After the reboot, the shared folder mounts at `/media/sf_Downloads`:
 ls /media/sf_Downloads
 ```
 
-![Shared folder working](screenshots/06-shared-folder-working.png)
+![Shared folder working](06-shared-folder-working.png)
 
 ### Step 6: Set the static IP address
 
@@ -144,7 +144,7 @@ Network icon → **Edit Connections → Wired connection 1 → IPv4 Settings**
 | Gateway | `10.0.0.1` |
 | DNS servers | `8.8.8.8` |
 
-![Kali static IP configuration](screenshots/07-kali-static-ip-config.png)
+![Kali static IP configuration](07-kali-static-ip-config.png)
 
 ### Step 7: Apply the connectivity fix and verify the IP
 
@@ -159,7 +159,7 @@ ip a
 
 `eth0` now shows `10.0.0.2/24`.
 
-![nmcli fix and ip a](screenshots/08-nmcli-fix-and-ip-a.png)
+![nmcli fix and ip a](08-nmcli-fix-and-ip-a.png)
 
 ### Step 8: Test internet access
 
@@ -170,19 +170,19 @@ ping -c 4 google.com
 
 Both return 0% packet loss, so IP connectivity and DNS resolution both work.
 
-![Internet ping test](screenshots/09-internet-ping-test.png)
+![Internet ping test](09-internet-ping-test.png)
 
 ### Step 9: Final result
 
 The final desktop shows the IP, the default route via `10.0.0.1`, and live browsing to `networkwalks.com`.
 
-![Kali desktop final](screenshots/10-kali-desktop-final.png)
+![Kali desktop final](10-kali-desktop-final.png)
 
 ### Step 10: Take a snapshot
 
 A snapshot named **"Kali configured – NAT 10.0.0.2"** protects the working configuration so I can always roll back.
 
-![Kali snapshot](screenshots/11-kali-snapshot.png)
+![Kali snapshot](11-kali-snapshot.png)
 
 ---
 
@@ -194,7 +194,7 @@ A snapshot named **"Kali configured – NAT 10.0.0.2"** protects the working con
 
 `android-x86_64-9.0-r2.iso` (921 MB), downloaded from the official Android-x86 project page.
 
-![Android ISO downloaded](screenshots/pmx-b-01-android-iso-downloaded.png)
+![Android ISO downloaded](pmx-b-01-android-iso-downloaded.png)
 
 ### Step 2: Create the VM
 
@@ -205,49 +205,49 @@ A snapshot named **"Kali configured – NAT 10.0.0.2"** protects the working con
 | Memory | 2048 MB |
 | Disk | 10 GB, VDI, dynamically allocated |
 
-![Android VM summary](screenshots/pmx-b-02-android-vm-summary.png)
+![Android VM summary](pmx-b-02-android-vm-summary.png)
 
 ### Step 3: Attach the ISO
 
 **Settings → Storage** → attach the Android-x86 ISO to the optical drive on SATA Port 1.
 
-![Android storage ISO](screenshots/pmx-b-03-android-storage-iso.png)
+![Android storage ISO](pmx-b-03-android-storage-iso.png)
 
 ### Step 4: Display settings
 
 Video memory raised to **128 MB** (minimum 64 MB) with **3D Acceleration** enabled.
 
-![Android display settings](screenshots/pmx-b-04-android-display-settings.png)
+![Android display settings](pmx-b-04-android-display-settings.png)
 
 ### Step 5: Install Android-x86 to disk
 
 Boot menu → *Installation: Install Android-x86 to harddisk* → ext4 filesystem → install GRUB → make the system writable.
 
-![Android install complete](screenshots/pmx-b-05-android-install-complete.png)
+![Android install complete](pmx-b-05-android-install-complete.png)
 
 ### Step 6: First boot
 
-![Android home screen](screenshots/pmx-b-06-android-home-screen.png)
+![Android home screen](pmx-b-06-android-home-screen.png)
 
 ### Step 7: Connectivity tests
 
 **From Android:** the VM reaches Kali (`10.0.0.2`) and the internet (`8.8.8.8`) with 0% loss. The routing table shows the default gateway `10.0.0.1`.
 
-![Android pings Kali and internet](screenshots/pmx-b-09-android-ping-kali-internet.png)
+![Android pings Kali and internet](pmx-b-09-android-ping-kali-internet.png)
 
 **From Kali:** `ping -c 4 10.0.0.9` also succeeds with 0% loss, so connectivity works in both directions.
 
-![Kali pings Android](screenshots/pmx-b-10-kali-ping-android.png)
+![Kali pings Android](pmx-b-10-kali-ping-android.png)
 
 ### Step 8: Both VMs running side by side
 
-![Kali and Android running together](screenshots/pmx-b-11-both-pings-submission.png)
+![Kali and Android running together](pmx-b-11-both-pings-submission.png)
 
 ### Step 9: Snapshot
 
 Snapshot **"Android9 configured – NAT 10.0.0.9"**.
 
-![Android snapshot](screenshots/pmx-b-12-android-snapshot.png)
+![Android snapshot](pmx-b-12-android-snapshot.png)
 
 ---
 
@@ -259,15 +259,15 @@ Snapshot **"Android9 configured – NAT 10.0.0.9"**.
 
 1. Obtained the official Windows 10 ISO using Microsoft's Media Creation Tool and verified its contents.
 
-   ![Windows ISO contents](screenshots/pmx-a-01-win10-iso-downloaded.png)
+   ![Windows ISO contents](pmx-a-01-win10-iso-downloaded.png)
 
 2. Created the `Windows10-Lab` VM (Windows 10 64-bit, 4096 MB RAM, 40 GB VDI disk).
 
-   ![Windows VM summary](screenshots/pmx-a-02-vm-summary.png)
+   ![Windows VM summary](pmx-a-02-vm-summary.png)
 
 3. Attached the ISO to the virtual optical drive.
 
-   ![Windows storage ISO attached](screenshots/pmx-a-03-storage-iso-attached.png)
+   ![Windows storage ISO attached](pmx-a-03-storage-iso-attached.png)
 
 **Remaining**
 
@@ -294,15 +294,15 @@ I worked through the Networkwalks Wireshark SOC labs as a SOC analyst, investiga
 
 | Lab 1: Follow TCP Stream | Lab 2: HTTP Credentials | Lab 3: VoIP Call Replay |
 |---|---|---|
-| ![Lab 1 result](screenshots/Lab_1_Result_-_Ayman_Chabchoub.png) | ![Lab 2 result](screenshots/Lab_2_Result_-_ayman_chabchoub.png) | ![Lab 3 result](screenshots/Lab_3_Result_-_ayman_chabchoub.png) |
+| ![Lab 1 result](Lab_1_Result_-_Ayman_Chabchoub.png) | ![Lab 2 result](Lab_2_Result_-_ayman_chabchoub.png) | ![Lab 3 result](Lab_3_Result_-_ayman_chabchoub.png) |
 
 | Lab 4: Packet Capture | Lab 5: PCAP Analysis |
 |---|---|
-| ![Lab 4 result](screenshots/Wireshark-Lab4-result.png) | ![Lab 5 result](screenshots/Wireshark-Lab5-result.png) |
+| ![Lab 4 result](Wireshark-Lab4-result.png) | ![Lab 5 result](Wireshark-Lab5-result.png) |
 
 ### Lab environment
 
-![Wireshark Lab 1 start](screenshots/pmx-c-lab1-start.png)
+![Wireshark Lab 1 start](pmx-c-lab1-start.png)
 
 ### Useful Wireshark filters used
 
@@ -366,37 +366,36 @@ I worked through the Networkwalks Wireshark SOC labs as a SOC analyst, investiga
 ```
 .
 ├── README.md
-└── screenshots/
-    ├── 01-virtualbox-nat-network.png
-    ├── 02-kali-network-adapter.png
-    ├── 03-kali-clipboard-dragdrop.png
-    ├── 04-kali-shared-folder-settings.png
-    ├── 05-guest-additions-install.png
-    ├── 06-shared-folder-working.png
-    ├── 07-kali-static-ip-config.png
-    ├── 08-nmcli-fix-and-ip-a.png
-    ├── 09-internet-ping-test.png
-    ├── 10-kali-desktop-final.png
-    ├── 11-kali-snapshot.png
-    ├── pmx-a-01-win10-iso-downloaded.png
-    ├── pmx-a-02-vm-summary.png
-    ├── pmx-a-03-storage-iso-attached.png
-    ├── pmx-b-01-android-iso-downloaded.png
-    ├── pmx-b-02-android-vm-summary.png
-    ├── pmx-b-03-android-storage-iso.png
-    ├── pmx-b-04-android-display-settings.png
-    ├── pmx-b-05-android-install-complete.png
-    ├── pmx-b-06-android-home-screen.png
-    ├── pmx-b-09-android-ping-kali-internet.png
-    ├── pmx-b-10-kali-ping-android.png
-    ├── pmx-b-11-both-pings-submission.png
-    ├── pmx-b-12-android-snapshot.png
-    ├── pmx-c-lab1-start.png
-    ├── Lab_1_Result_-_Ayman_Chabchoub.png
-    ├── Lab_2_Result_-_ayman_chabchoub.png
-    ├── Lab_3_Result_-_ayman_chabchoub.png
-    ├── Wireshark-Lab4-result.png
-    └── Wireshark-Lab5-result.png
+├── 01-virtualbox-nat-network.png
+├── 02-kali-network-adapter.png
+├── 03-kali-clipboard-dragdrop.png
+├── 04-kali-shared-folder-settings.png
+├── 05-guest-additions-install.png
+├── 06-shared-folder-working.png
+├── 07-kali-static-ip-config.png
+├── 08-nmcli-fix-and-ip-a.png
+├── 09-internet-ping-test.png
+├── 10-kali-desktop-final.png
+├── 11-kali-snapshot.png
+├── pmx-a-01-win10-iso-downloaded.png
+├── pmx-a-02-vm-summary.png
+├── pmx-a-03-storage-iso-attached.png
+├── pmx-b-01-android-iso-downloaded.png
+├── pmx-b-02-android-vm-summary.png
+├── pmx-b-03-android-storage-iso.png
+├── pmx-b-04-android-display-settings.png
+├── pmx-b-05-android-install-complete.png
+├── pmx-b-06-android-home-screen.png
+├── pmx-b-09-android-ping-kali-internet.png
+├── pmx-b-10-kali-ping-android.png
+├── pmx-b-11-both-pings-submission.png
+├── pmx-b-12-android-snapshot.png
+├── pmx-c-lab1-start.png
+├── Lab_1_Result_-_Ayman_Chabchoub.png
+├── Lab_2_Result_-_ayman_chabchoub.png
+├── Lab_3_Result_-_ayman_chabchoub.png
+├── Wireshark-Lab4-result.png
+└── Wireshark-Lab5-result.png
 ```
 
 ---
